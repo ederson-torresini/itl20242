@@ -14,12 +14,11 @@ def on_received_number(receivedNumber):
 radio.on_received_number(on_received_number)
 
 def on_button_pressed_a():
-    global canal
-    canal += 1
-    if canal == 5:
-        canal = 1
-    radio.set_group(canal)
-    basic.show_number(canal)
+    global magia
+    magia += 1
+    if magia == 4:
+        magia = 1
+    basic.show_number(magia)
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
 def on_gesture_shake():
@@ -39,18 +38,20 @@ def on_button_pressed_ab():
 input.on_button_pressed(Button.AB, on_button_pressed_ab)
 
 def on_button_pressed_b():
-    global magia
-    magia += 1
-    if magia == 4:
-        magia = 1
-    basic.show_number(magia)
+    global frequencia
+    frequencia += 1
+    if frequencia == 5:
+        frequencia = 1
+    radio.set_group(frequencia)
+    basic.show_number(frequencia)
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
-canal = 0
+frequencia = 0
 magiasRecebidas = 0
 magia = 0
 magia = 1
 magiasRecebidas = 0
-canal = 1
-radio.set_group(canal)
+frequencia = 1
+radio.set_group(frequencia)
+basic.show_icon(IconNames.YES)
 ```
