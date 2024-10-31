@@ -1,61 +1,60 @@
 # Aula 3
 
-Definir o controle remoto dos projetos das equipes na feira de ciências.
+Aprender sobre variáveis e estruturas de decisão e de repetição.
 
-## Experimento 3.1: controle remoto distribuído para todas as equipes
+## Experimento 3.1: jogo de nave
 
-Nesse cenário, todos os Micro:bits podem enviar e receber comandos.
-
-```mermaid
-flowchart TD
-  root((Central))
-  root --- Equipe-01
-  root --- Equipe-02
-  root --- Equipe-03
-  root --- Equipe-04
-  root --- Equipe-05
-  root --- Equipe-06
-  root --- Equipe-07
-  root --- Equipe-08
-  root --- Equipe-09
-  root --- Equipe-10
-  root --- Equipe-11
-```
+Jogo para dois jogadores: cada um controla sua nave, com movimentação lateral (botões A e B), e pode atirar laser no oponente (A + B). Vence quem acertar 3 tiros primeiro. Baseado **TOTALMENTE** no vídeo [Episode 7 - Wargames](https://www.youtube.com/watch?v=l7LTg15KPgE) do canal [Micromonsters](https://www.youtube.com/@MicroMonsters).
 
 Código em Python:
 
 ```python
 def on_received_number(receivedNumber):
-    global comando
-    if receivedNumber >= equipe * 10 and receivedNumber <= equipe * 10 + 9:
-        comando = receivedNumber % (equipe * 10)
-        basic.show_number(comando)
+    global tiro
+    tiro = game.create_sprite(receivedNumber, 0)
+    for índice in range(4):
+        basic.pause(100)
+        tiro.change(LedSpriteProperty.Y, 1)
+    if tiro.is_touching(nave):
+        radio.send_string("acertou")
+        game.remove_life(1)
+    tiro.delete()
 radio.on_received_number(on_received_number)
 
 def on_button_pressed_a():
-    global equipe
-    equipe += 1
-    if equipe > 11:
-        equipe = 1
-    basic.show_number(equipe)
+    nave.change(LedSpriteProperty.X, -1)
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
 def on_button_pressed_ab():
-    radio.send_number(equipe * 10 + comando)
+    global tiro
+    tiro = game.create_sprite(nave.get(LedSpriteProperty.X), 4)
+    for índice2 in range(4):
+        basic.pause(100)
+        tiro.change(LedSpriteProperty.Y, -1)
+    radio.send_number(tiro.get(LedSpriteProperty.X))
+    tiro.delete()
 input.on_button_pressed(Button.AB, on_button_pressed_ab)
 
+def on_received_string(receivedString):
+    if receivedString == "acertou":
+        game.add_score(1)
+    elif receivedString == "ganhou":
+        game.game_over()
+radio.on_received_string(on_received_string)
+
 def on_button_pressed_b():
-    global comando
-    comando += 1
-    if comando > 9:
-        comando = 0
-    basic.show_number(comando)
+    nave.change(LedSpriteProperty.X, 1)
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
-comando = 0
-equipe = 0
-basic.show_icon(IconNames.HEART)
+tiro: game.LedSprite = None
+nave: game.LedSprite = None
 radio.set_group(1)
-equipe = 8
-comando = 0
+nave = game.create_sprite(2, 4)
+game.set_life(3)
+
+def on_forever():
+    if game.is_game_over():
+        radio.send_string("ganhou")
+    basic.pause(100)
+basic.forever(on_forever)
 ```
