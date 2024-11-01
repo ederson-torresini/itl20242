@@ -1,6 +1,6 @@
 # Aula 2 
 
-Aprender sobre comunicação via rádio.
+Aprender sobre variáveis e funções com trocas de dados via rádio.
 
 ## Experimento 2.1: dia das bruxas
 
