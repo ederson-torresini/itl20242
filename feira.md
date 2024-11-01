@@ -5,7 +5,7 @@ Nesse cenário, todos os Micro:bits podem enviar e receber comandos.
 ```mermaid
 flowchart TD
   central([Central])
-  e1[Equipe 01]
+  e1[Equipe 1]
   e2[Equipe 2]
   e12[Equipe 12]
 
