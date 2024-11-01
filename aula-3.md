@@ -1,6 +1,6 @@
 # Aula 3
 
-Aprender sobre variáveis e estruturas de decisão e de repetição.
+Aprender sobre objetos, com *sprites*, e matrizes.
 
 ## Experimento 3.1: jogo de nave
 
