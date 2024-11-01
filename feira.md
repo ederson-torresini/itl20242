@@ -1,9 +1,5 @@
 # Feira
 
-Definir o controle remoto dos projetos das equipes na feira de ciências.
-
-## Experimento 3.1: controle remoto distribuído para todas as equipes
-
 Nesse cenário, todos os Micro:bits podem enviar e receber comandos.
 
 ```mermaid
