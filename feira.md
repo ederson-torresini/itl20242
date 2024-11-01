@@ -4,18 +4,15 @@ Nesse cenário, todos os Micro:bits podem enviar e receber comandos.
 
 ```mermaid
 flowchart TD
-  root((Central))
-  root --- Equipe-01
-  root --- Equipe-02
-  root --- Equipe-03
-  root --- Equipe-04
-  root --- Equipe-05
-  root --- Equipe-06
-  root --- Equipe-07
-  root --- Equipe-08
-  root --- Equipe-09
-  root --- Equipe-10
-  root --- Equipe-11
+  central([Central])
+  e1[Equipe 01]
+  e2[Equipe 2]
+  e12[Equipe 12]
+
+  central --- e1
+  central --- e2
+  central --- ...
+  central --- e12
 ```
 
 Código em Python:
