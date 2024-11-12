@@ -1,6 +1,6 @@
-FROM python
+FROM python:3
 
-RUN pip install python-dotenv paho-mqtt
-COPY ./central-de-controle/central.py /central.py
+COPY ./central-de-controle/requirements.txt ./central-de-controle/central.py /
+RUN pip install -r /requirements.txt
 
 CMD ["python", "/central.py"]
