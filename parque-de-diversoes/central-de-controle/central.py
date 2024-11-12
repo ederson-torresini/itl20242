@@ -6,7 +6,7 @@ import serial
 
 load_dotenv()
 mqtt_host = getenv("MQTT_HOST", default="test.mosquitto.org")
-mqtt_topic = getenv("MQTT_TOPIC", default="itl20242/atualizar")
+mqtt_topic = getenv("MQTT_TOPIC", default="itl20242/req")
 serial_port = getenv("SERIAL_PORT", default="/dev/ttyACM0")
 
 
@@ -26,7 +26,7 @@ def on_message(client, userdata, msg):
         except Exception as e:
             print(e)
             print(mensagem)
-        mqtt_client.publish(f"{disciplina}/estado/{brinquedo}", comando)
+        mqtt_client.publish(f"{disciplina}/res/{brinquedo}", comando)
 
 
 try:
