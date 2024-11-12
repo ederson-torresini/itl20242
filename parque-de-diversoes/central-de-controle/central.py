@@ -9,8 +9,10 @@ mqtt_port = getenv("MQTT_PORT", default=1883)
 mqtt_topic = getenv("MQTT_TOPIC", default="itl20242/atualizar")
 mqtt_keepalive = getenv("MQTT_KEEPALIVE", default=60)
 
+
 def on_connect(client, userdata, flags, reason_code, properties):
     client.subscribe(mqtt_topic + "/#")
+
 
 def on_message(client, userdata, msg):
     print(msg.topic, msg.payload.decode())
@@ -18,6 +20,7 @@ def on_message(client, userdata, msg):
         disciplina, sentido, brinquedo = msg.topic.split("/")
         comando = msg.payload.decode()
         mqtt_client.publish(f"{disciplina}/estado/{brinquedo}", comando)
+
 
 mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
 mqtt_client.on_connect = on_connect
