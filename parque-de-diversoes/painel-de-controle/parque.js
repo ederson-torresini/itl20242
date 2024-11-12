@@ -6,7 +6,7 @@ export default class parque extends Phaser.Scene {
   preload () { }
 
   create () {
-    this.mqttClient = mqtt.connect("wss://feira-de-jogos.dev.br")
+    this.mqttClient = mqtt.connect("wss://test.mosquitto.org:8081")
 
     this.mqttClient.on("connect", () => {
       this.mqttClient.subscribe("itl20242/estado/#", (err) => {
