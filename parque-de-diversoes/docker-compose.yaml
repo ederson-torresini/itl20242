@@ -1,0 +1,20 @@
+services:
+  mqtt-broker:
+    image: eclipse-mosquitto
+    restart: always
+    ports:
+      - 1883:1883
+    volumes:
+      - ./mqtt-broker/mosquitto.conf:/mosquitto/config/mosquitto.conf
+  http-proxy:
+    depends_on:
+      - mqtt-broker
+    image: nginx
+    ports:
+      - 80:80/tcp
+      - 443:443/tcp
+    volumes:
+      - ./http-proxy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - /etc/letsencrypt/live/itl.sj.ifsc.edu.br/fullchain.pem:/etc/nginx/fullchain.pem:ro
+      - /etc/letsencrypt/live/itl.sj.ifsc.edu.br/privkey.pem:/etc/nginx/privkey.pem:ro
+      - ./painel-de-controle:/frontend:ro

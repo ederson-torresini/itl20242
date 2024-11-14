@@ -1,30 +1,30 @@
 export default class parque extends Phaser.Scene {
-  constructor() {
-    super("parque");
+  constructor () {
+    super("parque")
   }
 
-  preload() {
-    this.load.audio("sino", "assets/sino.mp3");
+  preload () {
+    this.load.audio("sino", "assets/sino.mp3")
   }
 
-  create() {
-    this.sino = this.sound.add("sino");
+  create () {
+    this.sino = this.sound.add("sino")
 
-    this.mqttClient = mqtt.connect("wss://test.mosquitto.org:8081");
+    this.mqttClient = mqtt.connect("wss://itl.sj.ifsc.edu.br/mqtt/")
 
     this.mqttClient.on("connect", (err) => {
-      console.log("Conectado ao broker MQTT");
+      console.log("Conectado ao broker MQTT")
       this.mqttClient.subscribe("itl20242/res/#", (err) => {
         if (!err) {
-          console.log("Tópico assinado");
+          console.log("Tópico assinado")
         }
-      });
-    });
+      })
+    })
 
     this.mqttClient.on("message", (topic, message) => {
-      this.sino.play();
-      console.log(topic, message.toString());
-    });
+      this.sino.play()
+      console.log(topic, message.toString())
+    })
 
     this.brinquedos = [
       { x: 100, y: 100, numero: "1" },
@@ -39,15 +39,15 @@ export default class parque extends Phaser.Scene {
       { x: 100, y: 700, numero: "10" },
       { x: 250, y: 700, numero: "11" },
       { x: 400, y: 700, numero: "12" },
-    ];
+    ]
 
     this.brinquedos.forEach((brinquedo) => {
       this.add.text(brinquedo.x, brinquedo.y, brinquedo.numero, {
         fontSize: "32px",
         fill: "#fff",
         fontFamily: "Courier New",
-      });
-      brinquedo.comandos = [0, 1];
+      })
+      brinquedo.comandos = [0, 1]
       brinquedo.comandos.forEach((i) => {
         brinquedo.comandos[i] = this.add
           .text(brinquedo.x, brinquedo.y + (i + 1) * 50, i, {
@@ -60,11 +60,11 @@ export default class parque extends Phaser.Scene {
             this.mqttClient.publish(
               "itl20242/req/" + brinquedo.numero,
               i.toString(),
-            );
-          });
-      });
-    });
+            )
+          })
+      })
+    })
   }
 
-  update() {}
+  update () { }
 }

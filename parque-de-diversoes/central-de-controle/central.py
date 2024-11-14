@@ -5,7 +5,13 @@ from re import compile
 import serial
 
 load_dotenv()
-mqtt_host = getenv("MQTT_HOST", default="test.mosquitto.org")
+
+mqtt_host = getenv("MQTT_HOST", default="itl.sj.ifsc.edu.br")
+mqtt_transport = getenv("MQTT_TRANSPORT", default="websockets")
+mqtt_secure = getenv("MQTT_SECURE", default="true") == "true"
+mqtt_port = int(getenv("MQTT_PORT", default="443"))
+mqtt_timeout = int(getenv("MQTT_TIMEOUT", default="60"))
+mqtt_resource = getenv("MQTT_RESOURCE", default="/mqtt/")
 mqtt_topic = getenv("MQTT_TOPIC", default="itl20242/req")
 serial_port = getenv("SERIAL_PORT", default="/dev/ttyACM0")
 
@@ -34,8 +40,13 @@ try:
 except Exception as e:
     print(e)
 
-mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+# criar um cliente mqtt com conexão websocket
+
+mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, transport=mqtt_transport)
 mqtt_client.on_connect = on_connect
 mqtt_client.on_message = on_message
-mqtt_client.connect(mqtt_host)
+mqtt_client.ws_set_options(path=mqtt_resource)
+if mqtt_secure:
+    mqtt_client.tls_set()
+mqtt_client.connect(mqtt_host, mqtt_port, mqtt_timeout)
 mqtt_client.loop_forever()
