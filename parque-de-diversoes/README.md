@@ -24,3 +24,5 @@ sequenceDiagram
   Broker MQTT ->>- Painel de controle: NOTIFY itl20242/res/7 1
   Painel de controle ->>- Usuário: confirmação visual/sonora
 ```
+
+O painel de controle está disponível em: https://itl.sj.ifsc.edu.br.
