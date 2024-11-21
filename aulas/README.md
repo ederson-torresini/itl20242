@@ -11,4 +11,4 @@ Também está disponível um [código mínimo](feira.md) para trocas de dados en
 ## Micro:bit + Arduino
 
 1. Integração via pino digital: [LED embutido](https://www.tinkercad.com/things/1ArJyQvR39u-itl-20242-microbit-arduino) e [LED externo com medição de tensão e de corrente](https://www.tinkercad.com/things/kov5NkdBwmp-itl-20242-microbit-arduino-placa-de-ensaio).
-1. [Integração via pino digital para uso de  transistor para controle de motor](https://www.tinkercad.com/things/jSx19TtkABU-itl-20242-microbit-arduino-placa-de-ensaio-motor)
+1. Integração via pino digital para uso de  transistor para controle de motor: [fonte interna do Arduino](https://www.tinkercad.com/things/jSx19TtkABU-itl-20242-microbit-arduino-placa-de-ensaio-motor) e [fonte externa](https://www.tinkercad.com/things/eIT10o2ZnrP-itl-20242-microbit-arduino-motor-fonte-externa).
