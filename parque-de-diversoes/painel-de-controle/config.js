@@ -1,4 +1,5 @@
 export default {
+  backgroundColor: '#ffffff',
   type: Phaser.AUTO,
   width: 540,
   height: 960,
