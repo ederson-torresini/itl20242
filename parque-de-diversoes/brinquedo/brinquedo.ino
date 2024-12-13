@@ -1,6 +1,21 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
-#include "brinquedo.h"
+
+
+// Pinagem do motor
+#define MOTOR 12
+
+// Wi-Fi
+#define SSID "itl"
+#define PASSWORD "itl20242"
+
+// MQTT
+#define MQTT_SERVER "itl.sj.ifsc.edu.br"
+#define MQTT_PORT 1883
+#define MQTT_CLIENT_ID "brinquedo-5"
+#define MQTT_TOPIC_REQ "itl20242/req/5"
+#define MQTT_TOPIC_RES "itl20242/res/5"
+
 
 // Cliente Wi-Fi e MQTT
 WiFiClient espClient;
@@ -40,7 +55,7 @@ void callback(char *topic, byte *payload, unsigned int length)
 void setup()
 {
   // Interface serial
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   // Wi-Fi
   WiFi.begin(SSID, PASSWORD);
