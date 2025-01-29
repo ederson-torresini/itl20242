@@ -1,7 +1,8 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
 
-// Pinagem do motor
+// Pinagem para ESP32
+#define LED_BUILTIN 2
 #define MOTOR 12
 
 // Wi-Fi
@@ -35,6 +36,9 @@ void callback(char *topic, byte *payload, unsigned int length)
   if (payload[0] == '0')
   {
     Serial.println("Desligando o motor...");
+
+    // Desligar o motor
+    digitalWrite(MOTOR, LOW);
 
     // Publicar no tópico MQTT que o comando deu certo
     client.publish(MQTT_TOPIC_RES, "0");
