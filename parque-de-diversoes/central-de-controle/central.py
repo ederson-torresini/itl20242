@@ -5,7 +5,6 @@ from re import compile
 import serial
 
 load_dotenv()
-
 mqtt_host = getenv("MQTT_HOST", default="itl.sj.ifsc.edu.br")
 mqtt_transport = getenv("MQTT_TRANSPORT", default="websockets")
 mqtt_secure = getenv("MQTT_SECURE", default="true") == "true"
@@ -35,18 +34,14 @@ def on_message(client, userdata, msg):
         mqtt_client.publish(f"{disciplina}/res/{brinquedo}", comando)
 
 
-try:
-    microbit = serial.Serial(serial_port, 115200)
-except Exception as e:
-    print(e)
-
-# criar um cliente mqtt com conexão websocket
-
-mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, transport=mqtt_transport)
-mqtt_client.on_connect = on_connect
-mqtt_client.on_message = on_message
-mqtt_client.ws_set_options(path=mqtt_resource)
-if mqtt_secure:
-    mqtt_client.tls_set()
-mqtt_client.connect(mqtt_host, mqtt_port, mqtt_timeout)
-mqtt_client.loop_forever()
+if __name__ == "__main__":
+    mqtt_client = mqtt.Client(
+        mqtt.CallbackAPIVersion.VERSION2, transport=mqtt_transport
+    )
+    mqtt_client.on_connect = on_connect
+    mqtt_client.on_message = on_message
+    mqtt_client.ws_set_options(path=mqtt_resource)
+    if mqtt_secure:
+        mqtt_client.tls_set()
+    mqtt_client.connect(mqtt_host, mqtt_port, mqtt_timeout)
+    mqtt_client.loop_forever()
