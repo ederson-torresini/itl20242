@@ -35,6 +35,11 @@ def on_message(client, userdata, msg):
 
 
 if __name__ == "__main__":
+    try:
+        microbit = serial.Serial(serial_port, 115200)
+    except Exception as e:
+        print(e)
+
     mqtt_client = mqtt.Client(
         mqtt.CallbackAPIVersion.VERSION2, transport=mqtt_transport
     )
