@@ -4,7 +4,7 @@ Os visitantes do parque de diversões, a partir do painel de controle ([aplicaç
 
 A aplicação Web tem código disponível na pasta [painel-de-controle](./painel-de-controle). Está hospedada no servidor da disciplina, onde também está o broker MQTT.
 
-A configuração do servidor HTTPS, com NGINX, é a seguinte:
+A configuração do servidor HTTPS, com NGINX e Certbot, é a seguinte:
 
 ```nginx
 server {
@@ -301,3 +301,5 @@ void loop()
 ```
 
 onde os comandos `0` e `1` são usados para desligar e ligar o motor (pino 12), respectivamente.
+
+Como dependência de código, projetado para ESP32, apenas a biblioteca [`PubSubClient`](https://docs.arduino.cc/libraries/pubsubclient/).
