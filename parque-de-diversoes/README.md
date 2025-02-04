@@ -1,8 +1,12 @@
 # Parque de diversões
 
-Os visitantes do parque de diversões, a partir do painel de controle ([aplicação Web](https://itl.sj.ifsc.edu.br), enviam comandos para a central de controle que, por sua vez, propagam os comandos para os brinquedos.
+Os visitantes do parque de diversões, a partir do painel de controle ([aplicação Web](https://itl.sj.ifsc.edu.br)), enviam comandos para os brinquedos.
 
-A aplicação Web tem código disponível na pasta [painel-de-controle](./painel-de-controle). Está hospedada no servidor da disciplina, onde também está o broker MQTT.
+## Painel de controle
+
+A aplicação Web tem código disponível na pasta [painel-de-controle](./painel-de-controle). Está hospedada no servidor da disciplina, onde também está o *broker* MQTT.
+
+### Servidor HTTPS
 
 A configuração do servidor HTTPS, com NGINX e Certbot, é a seguinte:
 
@@ -58,7 +62,8 @@ server {
 }
 ```
 
-Já o broker MQTT, implementado com Mosquitto, tem a seguinte configuração adicional:
+### *Broker* MQTT
+Já o *broker* MQTT, implementado com Mosquitto, tem a seguinte configuração adicional:
 
 ```ini
 listener 1883
@@ -67,7 +72,7 @@ protocol websockets
 allow_anonymous true
 ```
 
-Para exemplificar o fluxo da mensagens, a seguir dois cenários onde um visitante escolhe o brinquedo `7` e comando `1`.
+Para exemplificar o fluxo da mensagens, há dois cenários a seguir, onde um visitante escolhe, a título de exemplo, o brinquedo `7` e o comando `1`.
 
 ## Com o uso de Micro:bit para troca de mensagens
 
@@ -165,6 +170,8 @@ paho-mqtt
 python-dotenv
 ```
 
+A central de controle, devido às restrições de distância de rádio e I<sup>2</sup>C, deve estar próximo dos brinquedos, preferencialmente no centro físico do parque.
+
 ## Com o uso de Arduino para troca de mensagens
 
 Este cenário é mais simples: apenas o Arduino do brinquedo é usado para receber os comandos via MQTT - diretamente do painel de controle (aplicação Web).
@@ -188,9 +195,7 @@ sequenceDiagram
   Painel de controle ->>- Usuário: confirmação visual/sonora
 ```
 
-## Código fonte do Arduino do brinquedo
-
-Em qualquer um dos cenários anteriores, o código fonte do Arduino do brinquedo é este:
+Nesse caso, o Arduino deve possuir suporte a IP/MQTT, seja por Ethernet ou Wi-Fi. No projeto da disciplina, a família ESP32 é considerada por ter Wi-Fi nativo - como no seguinte código:
 
 ```c++
 #include <WiFi.h>
@@ -302,4 +307,4 @@ void loop()
 
 onde os comandos `0` e `1` são usados para desligar e ligar o motor (pino 12), respectivamente.
 
-Como dependência de código, projetado para ESP32, apenas a biblioteca [`PubSubClient`](https://docs.arduino.cc/libraries/pubsubclient/).
+Como dependência de código, projetado para ESP32, há apenas a biblioteca [`PubSubClient`](https://docs.arduino.cc/libraries/pubsubclient/).
