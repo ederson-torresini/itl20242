@@ -257,6 +257,10 @@ void callback(char *topic, byte *payload, unsigned int length)
 
 void setup()
 {
+  // Configurar os pinos, LED embutido e motor, como saída
+  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(MOTOR, OUTPUT);
+
   // Interface serial
   Serial.begin(9600);
 
