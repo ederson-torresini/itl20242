@@ -98,7 +98,7 @@ export default class parque extends Phaser.Scene {
           if (this.desligar) this.desligar.destroy();
           this.desligar = this.add
             .sprite(
-              brinquedo.x - brinquedo.objeto.width / 2 + 32,
+              brinquedo.x - 32,
               brinquedo.y + brinquedo.objeto.height,
               "desligar",
             )
@@ -111,7 +111,7 @@ export default class parque extends Phaser.Scene {
           if (this.ligar) this.ligar.destroy();
           this.ligar = this.add
             .sprite(
-              brinquedo.x - brinquedo.objeto.width / 2 + 96,
+              brinquedo.x + 32,
               brinquedo.y + brinquedo.objeto.height,
               "ligar",
             )
