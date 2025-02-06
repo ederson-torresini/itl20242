@@ -12,6 +12,8 @@ export default class parque extends Phaser.Scene {
     this.load.image("barco-viking", "assets/barco-viking.png");
     this.load.image("carrossel", "assets/carrossel.png");
     this.load.image("montanha-russa", "assets/montanha-russa.png");
+    this.load.image("roda-gigante", "assets/roda-gigante.png");
+    this.load.image("chapéu-mexicano", "assets/chapéu-mexicano.png");
 
     this.load.spritesheet("desligar", "assets/desligar.png", {
       frameWidth: 64,
@@ -57,22 +59,34 @@ export default class parque extends Phaser.Scene {
 
     this.brinquedos = [
       {
-        x: 300,
+        x: 200,
         y: 200,
         imagem: "barco-viking",
         numero: 1,
       },
       {
-        x: 300,
-        y: 450,
+        x: 400,
+        y: 200,
         imagem: "carrossel",
         numero: 2,
       },
       {
-        x: 300,
-        y: 700,
+        x: 200,
+        y: 450,
         imagem: "montanha-russa",
         numero: 3,
+      },
+      {
+        x: 400,
+        y: 450,
+        imagem: "roda-gigante",
+        numero: 4,
+      },
+      {
+        x: 200,
+        y: 700,
+        imagem: "chapéu-mexicano",
+        numero: 5,
       },
     ];
 
