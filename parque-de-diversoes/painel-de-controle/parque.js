@@ -9,12 +9,6 @@ export default class parque extends Phaser.Scene {
   preload() {
     this.load.audio("sino", "assets/sino.mp3");
 
-    this.load.image("barco-viking", "assets/barco-viking.png");
-    this.load.image("carrossel", "assets/carrossel.png");
-    this.load.image("montanha-russa", "assets/montanha-russa.png");
-    this.load.image("roda-gigante", "assets/roda-gigante.png");
-    this.load.image("chapéu-mexicano", "assets/chapéu-mexicano.png");
-
     this.load.spritesheet("ligar", "assets/ligar.png", {
       frameWidth: 64,
       frameHeight: 64,
@@ -59,47 +53,69 @@ export default class parque extends Phaser.Scene {
 
     this.brinquedos = [
       {
-        x: 200,
-        y: 200,
-        imagem: "barco-viking",
+        x: 100,
+        y: 100,
+        letra: "J", // barco viking
         numero: 1,
       },
       {
-        x: 400,
-        y: 200,
-        imagem: "carrossel",
+        x: 300,
+        y: 100,
+        letra: "h", // carrossel
         numero: 2,
       },
       {
-        x: 200,
-        y: 450,
-        imagem: "montanha-russa",
+        x: 100,
+        y: 300,
+        letra: "7", // montanha russa
         numero: 3,
       },
       {
-        x: 400,
-        y: 450,
-        imagem: "roda-gigante",
+        x: 300,
+        y: 300,
+        letra: "j", // roda gigante
         numero: 4,
       },
       {
-        x: 200,
-        y: 700,
-        imagem: "chapéu-mexicano",
+        x: 100,
+        y: 500,
+        letra: ";", // chapéu mexicano
         numero: 5,
+      },
+      {
+        x: 300,
+        y: 500,
+        letra: "D", // samba
+        numero: 6,
+      },
+      {
+        x: 100,
+        y: 700,
+        letra: "K", // carrinho
+        numero: 7,
+      },
+      {
+        x: 300,
+        y: 700,
+        letra: "y", // roda gigante
+        numero: 8,
       },
     ];
 
     this.brinquedos.forEach((brinquedo) => {
       brinquedo.objeto = this.add
-        .sprite(brinquedo.x, brinquedo.y, brinquedo.imagem)
+        .text(brinquedo.x, brinquedo.y, brinquedo.letra, {
+          fontFamily: "amusement-park",
+          fontSize: 200,
+          color: "#000000",
+        })
         .setInteractive()
         .on("pointerdown", () => {
           if (this.ligar) this.ligar.destroy();
           this.ligar = this.add
             .sprite(
-              brinquedo.x - 32,
-              brinquedo.y + brinquedo.objeto.height,
+              brinquedo.x + brinquedo.objeto.width / 2 - 32,
+              brinquedo.y + brinquedo.objeto.height + 32,
               "ligar",
             )
             .setInteractive()
@@ -111,8 +127,8 @@ export default class parque extends Phaser.Scene {
           if (this.desligar) this.desligar.destroy();
           this.desligar = this.add
             .sprite(
-              brinquedo.x + 32,
-              brinquedo.y + brinquedo.objeto.height,
+              brinquedo.x + brinquedo.objeto.width / 2 + 32,
+              brinquedo.y + brinquedo.objeto.height + 32,
               "desligar",
             )
             .setInteractive()
