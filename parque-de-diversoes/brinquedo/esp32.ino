@@ -1,5 +1,5 @@
-#include <WiFi.h>
 #include <PubSubClient.h>
+#include <WiFi.h>
 
 // Pinagem para ESP32
 #define LED_BUILTIN 2
@@ -21,11 +21,9 @@ WiFiClient espClient;
 PubSubClient client(espClient);
 
 // Função de callback para receber mensagens MQTT
-void callback(char *topic, byte *payload, unsigned int length)
-{
+void callback(char *topic, byte *payload, unsigned int length) {
   // Pisca o LED embutido 3 vezes em intervalos de 100ms
-  for (int i = 0; i < 3; i++)
-  {
+  for (int i = 0; i < 3; i++) {
     digitalWrite(LED_BUILTIN, LOW);
     delay(100);
     digitalWrite(LED_BUILTIN, HIGH);
@@ -33,8 +31,7 @@ void callback(char *topic, byte *payload, unsigned int length)
   }
 
   // Verificar o valor da mensagem
-  if (payload[0] == '0')
-  {
+  if (payload[0] == '0') {
     Serial.println("Desligando o motor...");
 
     // Desligar o motor
@@ -42,9 +39,7 @@ void callback(char *topic, byte *payload, unsigned int length)
 
     // Publicar no tópico MQTT que o comando deu certo
     client.publish(MQTT_TOPIC_RES, "0");
-  }
-  else if (payload[0] == '1')
-  {
+  } else if (payload[0] == '1') {
     Serial.println("Ligando o motor...");
 
     // Ligar o motor
@@ -55,8 +50,7 @@ void callback(char *topic, byte *payload, unsigned int length)
   }
 }
 
-void setup()
-{
+void setup() {
   // Configurar os pinos, LED embutido e motor, como saída
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(MOTOR, OUTPUT);
@@ -66,8 +60,7 @@ void setup()
 
   // Wi-Fi
   WiFi.begin(SSID, PASSWORD);
-  while (WiFi.status() != WL_CONNECTED)
-  {
+  while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
     Serial.println("Conectando ao Wi-Fi...");
   }
@@ -78,17 +71,14 @@ void setup()
   client.setCallback(callback);
 }
 
-void loop()
-{
+void loop() {
   // Verificar se está conectado no broker MQTT
-  if (!client.connected())
-  {
+  if (!client.connected()) {
     // Desligar o LED embutido da placa
     digitalWrite(LED_BUILTIN, LOW);
 
     // (Re)Conectar com o broker MQTT, se necessário
-    if (client.connect(MQTT_CLIENT_ID))
-    {
+    if (client.connect(MQTT_CLIENT_ID)) {
       Serial.println("Conectado ao broker MQTT!");
 
       // Ligar o LED embutido da placa
@@ -96,10 +86,8 @@ void loop()
 
       // Inscrever no tópico de requisição
       client.subscribe(MQTT_TOPIC_REQ);
-    }
-    else
-    {
-      Serial.print("Falha na reconexão com o broker MQTT. Tentando novamente em 5 segundos...");
+    } else {
+      Serial.print("Broker MQTT: reconectando em 5s...");
       delay(5000);
     }
   }
