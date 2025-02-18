@@ -1,13 +1,13 @@
 export default {
   backgroundColor: '#ffffff',
   type: Phaser.AUTO,
-  width: 540,
-  height: 960,
-  pixelArt: true,
+  width: 1600,
+  height: 900,
   parent: 'game-container',
   physics: {
     default: 'arcade',
     arcade: {
+      debug: true,
       gravity: { y: 0 }
     }
   },
@@ -15,7 +15,7 @@ export default {
     mode: Phaser.Scale.FIT,
     parent: 'game-container',
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    width: 540,
-    height: 960
+    width: 1600,
+    height: 900
   }
 }

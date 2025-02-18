@@ -13,9 +13,9 @@
 #define MQTT_TOPIC_RES "itl20242/res/5"
 
 // Cliente Ethernet e MQTT
-// byte mac[] = {0xDE, 0xED, 0xBA, 0xFE, 0xFE, 0xEF};
+byte mac[] = {0xDE, 0xED, 0xBA, 0xFE, 0xFE, 0xEF};
 EthernetClient ethClient;
-PubSubClient client(espClient);
+PubSubClient client(ethClient);
 
 // Função de callback para receber mensagens MQTT
 void callback(char *topic, byte *payload, unsigned int length) {
