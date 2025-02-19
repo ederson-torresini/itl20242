@@ -56,7 +56,7 @@ void setup() {
   Serial.begin(9600);
 
   // Ethernet
-  Ethernet.begin();
+  Ethernet.begin(mac);
   while (Ethernet.linkStatus() == LinkOFF) {
     Serial.println("Aguardando a conexão Ethernet...");
     delay(500);

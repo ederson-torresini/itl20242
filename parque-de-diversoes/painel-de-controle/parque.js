@@ -179,6 +179,7 @@ export default class parque extends Phaser.Scene {
       const obj = this.physics.add.staticImage(x, y, key).setScale(scale);
       obj.body.setCircle(obj.displayWidth / 2);
       obj.refreshBody();
+      
       this.physics.add.overlap(this.jogador, obj, () => {
         if (!this.popupOpen) {
           let popup;
