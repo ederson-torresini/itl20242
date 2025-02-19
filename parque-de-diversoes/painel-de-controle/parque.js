@@ -135,6 +135,7 @@ export default class parque extends Phaser.Scene {
       repeat: -1,
     });
 
+    this.input.addPointer(3);
     this.joystick = this.plugins.get("rexvirtualjoystickplugin").add(this, {
       x: 500,
       y: 600,
