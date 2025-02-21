@@ -1,32 +1,21 @@
-#include <Adafruit_LiquidCrystal.h>
 #include <WiFi.h>
 #include <PubSubClient.h>
 
 #define LED_BUILTIN 2
-#define LCD_SPI_DATA 3
-#define LCD_SPI_CLOCK 2
-#define LCD_SPI_LATCH 4
-#define SENSOR 12
+#define SENSOR 5
 
 #define SSID "itl"
 #define PASSWORD "itl20242"
 
 #define MQTT_SERVER "itl.sj.ifsc.edu.br"
 #define MQTT_PORT 1883
-#define MQTT_CLIENT_ID "brinquedo-5"
-#define MQTT_TOPIC_REQ "itl20242/req/5"
-#define MQTT_TOPIC_RES "itl20242/res/5"
+#define MQTT_CLIENT_ID "brinquedo-7"
+#define MQTT_TOPIC_REQ "itl20242/req/7"
+#define MQTT_TOPIC_RES "itl20242/res/7"
 
-Adafruit_LiquidCrystal lcdDisplay(LCD_SPI_DATA, LCD_SPI_CLOCK, LCD_SPI_LATCH);
 WiFiClient espClient;
 PubSubClient client(espClient);
 int placar = 0;
-
-void atualizarPlacar()
-{
-  lcdDisplay.setCursor(8, 0);
-  lcdDisplay.print(placar);
-}
 
 void callback(char *topic, byte *payload, unsigned int length)
 {
@@ -41,25 +30,27 @@ void callback(char *topic, byte *payload, unsigned int length)
   {
     Serial.println("Zerando o placar...");
     placar = 0;
-    atualizarPlacar();
     client.publish(MQTT_TOPIC_RES, "0");
   }
   else if (payload[0] == '1')
   {
     Serial.println("Incrementando o placar...");
     placar++;
-    atualizarPlacar();
     client.publish(MQTT_TOPIC_RES, "1");
+  }
+  else if (payload[0] == '2')
+  {
+    Serial.println("Decrementando o placar...");
+    placar--;
+    client.publish(MQTT_TOPIC_RES, "2");
   }
 }
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(LED_BUILTIN, OUTPUT);
-  lcdDisplay.begin(16, 2);
-  lcdDisplay.setCursor(0, 0);
-  lcdDisplay.print("Placar: 0");
+  pinMode(SENSOR, INPUT);
   WiFi.begin(SSID, PASSWORD);
   while (WiFi.status() != WL_CONNECTED)
   {
@@ -73,10 +64,11 @@ void setup()
 
 void loop()
 {
-  if (digitalRead(SENSOR) == HIGH)
+  delay(50);
+  if (digitalRead(SENSOR) == LOW)
   {
     placar++;
-    atualizarPlacar();
+    Serial.println(placar);
   }
   if (!client.connected())
   {
