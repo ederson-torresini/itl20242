@@ -3,6 +3,9 @@
 #include <PubSubClient.h>
 
 #define LED_BUILTIN 2
+#define LCD_SPI_DATA 3
+#define LCD_SPI_CLOCK 2
+#define LCD_SPI_LATCH 4
 #define SENSOR 12
 
 #define SSID "itl"
@@ -13,10 +16,6 @@
 #define MQTT_CLIENT_ID "brinquedo-5"
 #define MQTT_TOPIC_REQ "itl20242/req/5"
 #define MQTT_TOPIC_RES "itl20242/res/5"
-
-#define LCD_SPI_DATA 3
-#define LCD_SPI_CLOCK 2
-#define LCD_SPI_LATCH 4
 
 Adafruit_LiquidCrystal lcdDisplay(LCD_SPI_DATA, LCD_SPI_CLOCK, LCD_SPI_LATCH);
 WiFiClient espClient;
