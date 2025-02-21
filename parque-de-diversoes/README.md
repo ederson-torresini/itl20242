@@ -196,7 +196,7 @@ sequenceDiagram
 ```
 
 Nesse caso, o Arduino deve possuir suporte a IP/MQTT, seja por Ethernet ou Wi-Fi.
-No projeto da disciplina, a família ESP32 é considerada por ter Wi-Fi nativo, e seu código está disponível em [esp32.ino](./brinquedo/esp32.ino).
-Para Arduino, esse código foi adaptado para [arduino.ino](./brinquedo/arduino.ino).
+No projeto da disciplina, a família ESP32 foi escolhida por ter Wi-Fi nativo.
+Há alguns [exemplos de código de ESP32 e de Arduino](./brinquedos/).
 
 Como dependência de código, há apenas a biblioteca [`PubSubClient`](https://docs.arduino.cc/libraries/pubsubclient/).
