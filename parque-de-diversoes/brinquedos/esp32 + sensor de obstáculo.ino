@@ -3,6 +3,7 @@
 
 #define LED_BUILTIN 2
 #define SENSOR 5
+#define LED 4
 
 #define SSID "itl"
 #define PASSWORD "itl20242"
@@ -29,19 +30,34 @@ void callback(char *topic, byte *payload, unsigned int length)
   if (payload[0] == '0')
   {
     Serial.println("Zerando o placar...");
+    for (int i = 0; i < 3; i++)
+    {
+      digitalWrite(LED, HIGH);
+      delay(100);
+      digitalWrite(LED, LOW);
+      delay(100);
+    }
     placar = 0;
     client.publish(MQTT_TOPIC_RES, "0");
   }
   else if (payload[0] == '1')
   {
     Serial.println("Incrementando o placar...");
-    placar++;
+    digitalWrite(LED, HIGH);
+      delay(100);
+      digitalWrite(LED, LOW);
+  
+      placar++;
     client.publish(MQTT_TOPIC_RES, "1");
   }
   else if (payload[0] == '2')
   {
     Serial.println("Decrementando o placar...");
-    placar--;
+   digitalWrite(LED, HIGH);
+      delay(100);
+      digitalWrite(LED, LOW);
+      
+       placar--;
     client.publish(MQTT_TOPIC_RES, "2");
   }
 }
@@ -50,6 +66,7 @@ void setup()
 {
   Serial.begin(115200);
   pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(LED, OUTPUT);
   pinMode(SENSOR, INPUT);
   WiFi.begin(SSID, PASSWORD);
   while (WiFi.status() != WL_CONNECTED)
@@ -68,6 +85,9 @@ void loop()
   if (digitalRead(SENSOR) == LOW)
   {
     placar++;
+    digitalWrite(LED, HIGH);
+    delay(3000);
+    digitalWrite(LED, LOW);
     Serial.println(placar);
   }
   if (!client.connected())
