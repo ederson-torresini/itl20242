@@ -3,7 +3,6 @@
 
 #define LED_BUILTIN 2
 #define MOTOR 12
-#define BRINQUEDO 5
 
 #define SSID "itl"
 #define PASSWORD "itl20242"
