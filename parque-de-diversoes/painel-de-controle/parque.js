@@ -34,7 +34,7 @@ export default class parque extends Phaser.Scene {
     );
     this.load.image("montanhaRussa", "../assets/brinquedos/montanhaRussa.png");
     this.load.image("samba", "../assets/brinquedos/samba.png");
-    // this.load.image("zipper", "../assets/brinquedos/zipper.png")
+    this.load.image("zipper", "../assets/brinquedos/zipper.png")
 
     this.load.image("painelElefante", "../assets/brinquedos/painel1.jpg");
     this.load.image("painelPadrao", "../assets/brinquedos/painel3.png");
@@ -42,7 +42,7 @@ export default class parque extends Phaser.Scene {
     this.load.image("button1", "../assets/brinquedos/on.png");
     this.load.image("button2", "../assets/brinquedos/off.png");
     this.load.image("button3", "../assets/brinquedos/botaoBaixo.png");
-    this.load.image("button4", "../assets/brinquedos/BotaoCima.png");
+    this.load.image("button4", "../assets/brinquedos/botaoCima.png");
   }
 
   create() {
@@ -205,7 +205,7 @@ export default class parque extends Phaser.Scene {
               eleButton1.setDepth(210);
               eleButton1.setInteractive({ useHandCursor: true });
               eleButton1.on("pointerdown", () => {
-                this.mqttClient.publish("itl20242/req/" + 12, "1");
+                this.mqttClient.publish("itl20242/req/" + 3, "1");//liga
                 console.log("Botão elefantinho 1 clicado");
               });
 
@@ -219,7 +219,7 @@ export default class parque extends Phaser.Scene {
               eleButton2.setDepth(210);
               eleButton2.setInteractive({ useHandCursor: true });
               eleButton2.on("pointerdown", () => {
-                this.mqttClient.publish("itl20242/req/" + 12, "0");
+                this.mqttClient.publish("itl20242/req/" + 3, "0");//desliga
                 console.log("Botão elefantinho 2 clicado");
               });
 
@@ -233,6 +233,7 @@ export default class parque extends Phaser.Scene {
               eleButton3.setDepth(210);
               eleButton3.setInteractive({ useHandCursor: true });
               eleButton3.on("pointerdown", () => {
+                this.mqttClient.publish("itlitl20242/req/" + 3, "2")//desce
                 console.log("Botão elefantinho 3 clicado");
               });
 
@@ -246,6 +247,7 @@ export default class parque extends Phaser.Scene {
               eleButton4.setDepth(210);
               eleButton4.setInteractive({ useHandCursor: true });
               eleButton4.on("pointerdown", () => {
+                this.mqttClient.publish("itl20242/req/" + 3, "3")//sobe
                 console.log("Botão elefantinho 4 clicado");
               });
 
@@ -291,6 +293,7 @@ export default class parque extends Phaser.Scene {
               chapeuButton1.setDepth(210);
               chapeuButton1.setInteractive({ useHandCursor: true });
               chapeuButton1.on("pointerdown", () => {
+                this.mqttClient.publish("itl20242/req/" + 4, "1")//liga
                 console.log("Botão chapeu mexicano 1 clicado");
               });
 
@@ -304,6 +307,7 @@ export default class parque extends Phaser.Scene {
               chapeuButton2.setDepth(210);
               chapeuButton2.setInteractive({ useHandCursor: true });
               chapeuButton2.on("pointerdown", () => {
+                this.mqttClient.publish("itl20242/req/" + 4, "0")//desliga
                 console.log("Botão chapeu mexicano 2 clicado");
               });
 
@@ -336,33 +340,36 @@ export default class parque extends Phaser.Scene {
               popup = this.add.image(
                 this.cameras.main.width / 2,
                 this.cameras.main.height / 2,
-                "popupBg",
+                "painelPadrao",
               );
+
               popup.setScrollFactor(0);
               popup.setDepth(200);
               popup.setScale(0.4);
 
               var zipperButton1 = this.add.image(
-                popup.x - 100,
-                popup.y,
+                popup.x - 80, popup.y + 35,
                 "button1",
               );
+              zipperButton1.setScale(0.5)
               zipperButton1.setScrollFactor(0);
               zipperButton1.setDepth(210);
               zipperButton1.setInteractive({ useHandCursor: true });
               zipperButton1.on("pointerdown", () => {
+                this.mqttClient.publish("itl20242/req/" + 8, "1")//liga
                 console.log("Botão zipper 1 clicado");
               });
 
               var zipperButton2 = this.add.image(
-                popup.x + 100,
-                popup.y,
+                popup.x + 80, popup.y +40,
                 "button2",
               );
+              zipperButton2.setScale(0.5)
               zipperButton2.setScrollFactor(0);
               zipperButton2.setDepth(210);
               zipperButton2.setInteractive({ useHandCursor: true });
               zipperButton2.on("pointerdown", () => {
+                this.mqttClient.publish("itl20242/req/" + 8, "0")//desliga
                 console.log("Botão zipper 2 clicado");
               });
 
@@ -390,17 +397,17 @@ export default class parque extends Phaser.Scene {
               popup = this.add.image(
                 this.cameras.main.width / 2,
                 this.cameras.main.height / 2,
-                "popupBg",
+                "painelPadrao",
               );
               popup.setScrollFactor(0);
               popup.setDepth(200);
               popup.setScale(0.4);
 
               var rg1button1 = this.add.image(
-                popup.x - 100,
-                popup.y,
+                popup.x - 80, popup.y + 35,
                 "button1",
               );
+              rg1button1.setScale(0.5)
               rg1button1.setScrollFactor(0);
               rg1button1.setDepth(210);
               rg1button1.setInteractive({ useHandCursor: true });
@@ -409,10 +416,10 @@ export default class parque extends Phaser.Scene {
               });
 
               var rg1button2 = this.add.image(
-                popup.x + 100,
-                popup.y,
+                popup.x + 80, popup.y +40,
                 "button2",
               );
+              rg1button2.setScale(0.5)
               rg1button2.setScrollFactor(0);
               rg1button2.setDepth(210);
               rg1button2.setInteractive({ useHandCursor: true });
@@ -444,17 +451,17 @@ export default class parque extends Phaser.Scene {
               popup = this.add.image(
                 this.cameras.main.width / 2,
                 this.cameras.main.height / 2,
-                "popupBg",
+                "painelPadrao",
               );
               popup.setScrollFactor(0);
               popup.setDepth(200);
               popup.setScale(0.4);
 
               var rg2button1 = this.add.image(
-                popup.x - 150,
-                popup.y - 50,
+                popup.x - 80, popup.y + 35,
                 "button1",
               );
+              rg2button1.setScale(0.5)
               rg2button1.setScrollFactor(0);
               rg2button1.setDepth(210);
               rg2button1.setInteractive({ useHandCursor: true });
@@ -463,10 +470,10 @@ export default class parque extends Phaser.Scene {
               });
 
               var rg2button2 = this.add.image(
-                popup.x + 150,
-                popup.y - 50,
+                popup.x + 80, popup.y +40,
                 "button2",
               );
+              rg2button2.setScale(0.5)
               rg2button2.setScrollFactor(0);
               rg2button2.setDepth(210);
               rg2button2.setInteractive({ useHandCursor: true });
@@ -475,10 +482,10 @@ export default class parque extends Phaser.Scene {
               });
 
               var rg2button3 = this.add.image(
-                popup.x - 150,
-                popup.y + 50,
-                "button3",
+                popup.x - 80, popup.y + 95,
+                "button1",
               );
+              rg2button3.setScale(0.5)
               rg2button3.setScrollFactor(0);
               rg2button3.setDepth(210);
               rg2button3.setInteractive({ useHandCursor: true });
@@ -487,10 +494,10 @@ export default class parque extends Phaser.Scene {
               });
 
               var rg2button4 = this.add.image(
-                popup.x + 150,
-                popup.y + 50,
-                "button4",
+                popup.x + 80, popup.y + 95,
+                "button2",
               );
+              rg2button4.setScale(0.5)
               rg2button4.setScrollFactor(0);
               rg2button4.setDepth(210);
               rg2button4.setInteractive({ useHandCursor: true });
@@ -524,25 +531,29 @@ export default class parque extends Phaser.Scene {
               popup = this.add.image(
                 this.cameras.main.width / 2,
                 this.cameras.main.height / 2,
-                "popupBg",
+                "painelPadrao",
               );
               popup.setScrollFactor(0);
               popup.setDepth(200);
               popup.setScale(0.4);
 
-              var bvbutton1 = this.add.image(popup.x - 100, popup.y, "button1");
+              var bvbutton1 = this.add.image(popup.x - 80, popup.y + 35, "button1");
+              bvbutton1.setScale(0.5)
               bvbutton1.setScrollFactor(0);
               bvbutton1.setDepth(210);
               bvbutton1.setInteractive({ useHandCursor: true });
               bvbutton1.on("pointerdown", () => {
+                this.mqttClient.publish("itl20242/req/" + 9, "1")//liga
                 console.log("Botão barcoViking 1 clicado");
               });
 
-              var bvbutton2 = this.add.image(popup.x + 100, popup.y, "button2");
+              var bvbutton2 = this.add.image(popup.x + 80, popup.y +40, "button2");
+              bvbutton2.setScale(0.5)
               bvbutton2.setScrollFactor(0);
               bvbutton2.setDepth(210);
               bvbutton2.setInteractive({ useHandCursor: true });
               bvbutton2.on("pointerdown", () => {
+                this.mqttClient.publish("itl20242/req/" + 9, "0")//desliga
                 console.log("Botão barcoViking 2 clicado");
               });
 
@@ -570,60 +581,39 @@ export default class parque extends Phaser.Scene {
               popup = this.add.image(
                 this.cameras.main.width / 2,
                 this.cameras.main.height / 2,
-                "popupBg",
+                "painelPadrao",
               );
               popup.setScrollFactor(0);
               popup.setDepth(200);
               popup.setScale(0.4);
 
               var sambabutton1 = this.add.image(
-                popup.x - 150,
-                popup.y - 50,
+                popup.x - 80, popup.y + 35,
                 "button1",
               );
+              sambabutton1.setScale(0.5)
               sambabutton1.setScrollFactor(0);
               sambabutton1.setDepth(210);
               sambabutton1.setInteractive({ useHandCursor: true });
               sambabutton1.on("pointerdown", () => {
+                this.mqttClient.publish("itl20242/req/" + 11, "1")//liga
                 console.log("Botão samba 1 clicado");
               });
 
               var sambabutton2 = this.add.image(
-                popup.x + 150,
-                popup.y - 50,
+                popup.x + 80, popup.y +40,
                 "button2",
               );
+              sambabutton2.setScale(0.5)
               sambabutton2.setScrollFactor(0);
               sambabutton2.setDepth(210);
               sambabutton2.setInteractive({ useHandCursor: true });
               sambabutton2.on("pointerdown", () => {
+                this.mqttClient.publish("itl20242/req/" + 11, "0")//desliga
                 console.log("Botão samba 2 clicado");
               });
 
-              var sambabutton3 = this.add.image(
-                popup.x - 150,
-                popup.y + 50,
-                "button3",
-              );
-              sambabutton3.setScrollFactor(0);
-              sambabutton3.setDepth(210);
-              sambabutton3.setInteractive({ useHandCursor: true });
-              sambabutton3.on("pointerdown", () => {
-                console.log("Botão samba 3 clicado");
-              });
-
-              var sambabutton4 = this.add.image(
-                popup.x + 150,
-                popup.y + 50,
-                "button4",
-              );
-              sambabutton4.setScrollFactor(0);
-              sambabutton4.setDepth(210);
-              sambabutton4.setInteractive({ useHandCursor: true });
-              sambabutton4.on("pointerdown", () => {
-                console.log("Botão samba 4 clicado");
-              });
-
+     
               var closeX_samba = popup.x + popup.displayWidth / 2 - 20;
               var closeY_samba = popup.y - popup.displayHeight / 2 + 20;
               var closeButton_samba = this.add.text(
@@ -645,8 +635,7 @@ export default class parque extends Phaser.Scene {
                 closeButton_samba.destroy();
                 sambabutton1.destroy();
                 sambabutton2.destroy();
-                sambabutton3.destroy();
-                sambabutton4.destroy();
+          
                 this.popupOpen = false;
               });
               break;
@@ -655,33 +644,35 @@ export default class parque extends Phaser.Scene {
               popup = this.add.image(
                 this.cameras.main.width / 2,
                 this.cameras.main.height / 2,
-                "popupBg",
+                "painelPadrao",
               );
               popup.setScrollFactor(0);
               popup.setDepth(200);
               popup.setScale(0.4);
 
               var basketbutton1 = this.add.image(
-                popup.x - 100,
-                popup.y,
+                popup.x - 80, popup.y + 35,
                 "button1",
               );
+              basketbutton1.setScale(0.5)
               basketbutton1.setScrollFactor(0);
               basketbutton1.setDepth(210);
               basketbutton1.setInteractive({ useHandCursor: true });
               basketbutton1.on("pointerdown", () => {
+                this.mqttClient.publish("itl20242/req/" + 7, "1")//liga
                 console.log("Botão basquete 1 clicado");
               });
 
               var basketbutton2 = this.add.image(
-                popup.x + 100,
-                popup.y,
+                popup.x + 80, popup.y +40,
                 "button2",
               );
+              basketbutton2.setScale(0.5)
               basketbutton2.setScrollFactor(0);
               basketbutton2.setDepth(210);
               basketbutton2.setInteractive({ useHandCursor: true });
               basketbutton2.on("pointerdown", () => {
+                this.mqttClient.publish("itl20242/req/" + 7, "0")//desliga
                 console.log("Botão basquete 2 clicado");
               });
 
@@ -714,25 +705,30 @@ export default class parque extends Phaser.Scene {
               popup = this.add.image(
                 this.cameras.main.width / 2,
                 this.cameras.main.height / 2,
-                "popupBg",
+                "painelPadrao",
               );
+
               popup.setScrollFactor(0);
               popup.setDepth(200);
               popup.setScale(0.4);
 
-              var mrbutton1 = this.add.image(popup.x - 100, popup.y, "button1");
+              var mrbutton1 = this.add.image(popup.x - 80, popup.y + 35, "button1");
+              mrbutton1.setScale(0.5)
               mrbutton1.setScrollFactor(0);
               mrbutton1.setDepth(210);
               mrbutton1.setInteractive({ useHandCursor: true });
               mrbutton1.on("pointerdown", () => {
+                this.mqttClient.publish("itl20242/req/" + 10, "1")//liga
                 console.log("Botão montanha russa 1 clicado");
               });
 
-              var mrbutton2 = this.add.image(popup.x + 100, popup.y, "button2");
+              var mrbutton2 = this.add.image(popup.x + 80, popup.y +40, "button2");
+              mrbutton2.setScale(0.5)
               mrbutton2.setScrollFactor(0);
               mrbutton2.setDepth(210);
               mrbutton2.setInteractive({ useHandCursor: true });
               mrbutton2.on("pointerdown", () => {
+                this.mqttClient.publish("itl20242/req/" + 10, "0")//desliga
                 console.log("Botão montanha russa 2 clicado");
               });
 
@@ -767,7 +763,7 @@ export default class parque extends Phaser.Scene {
     // CRIAÇÃO DOS BRINQUEDOS – defina as posições desejadas
     criarBrinquedo(1500, 1600, "elefantinho", 0.5, "elefantinho");
     criarBrinquedo(600, 660, "chapeuMexicano", 0.4, "chapeuMexicano");
-    criarBrinquedo(1200, 800, "zipper", 0.5, "zipper");
+    criarBrinquedo(1450, 650, "zipper", 0.7, "zipper");
     criarBrinquedo(500, 400, "rodaGigante1", 0.5, "rodaGigante1");
     criarBrinquedo(1450, 880, "rodaGigante2", 0.3, "rodaGigante2");
     criarBrinquedo(570, 1310, "barcoViking", 0.2, "barcoViking");
