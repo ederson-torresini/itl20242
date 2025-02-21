@@ -233,7 +233,7 @@ export default class parque extends Phaser.Scene {
               eleButton3.setDepth(210);
               eleButton3.setInteractive({ useHandCursor: true });
               eleButton3.on("pointerdown", () => {
-                this.mqttClient.publish("itlitl20242/req/" + 3, "2")//desce
+                this.mqttClient.publish("itl20242/req/" + 3, "2")//desce
                 console.log("Botão elefantinho 3 clicado");
               });
 
