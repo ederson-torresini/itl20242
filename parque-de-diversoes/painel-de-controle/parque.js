@@ -64,21 +64,6 @@ export default class parque extends Phaser.Scene {
       console.log(topic, message.toString());
     });
 
-    this.mqttClient = mqtt.connect("wss://itl.sj.ifsc.edu.br/mqtt/");
-
-    this.mqttClient.on("connect", (err) => {
-      console.log("Conectado ao broker MQTT");
-      this.mqttClient.subscribe("itl20242/res/#", (err) => {
-        if (!err) {
-          console.log("Tópico assinado");
-        }
-      });
-    });
-
-    this.mqttClient.on("message", (topic, message) => {
-      console.log(topic, message.toString());
-    });
-
     this.sino = this.sound.add('sino');
 
     this.add
@@ -210,7 +195,7 @@ export default class parque extends Phaser.Scene {
               eleButton1.setInteractive({ useHandCursor: true });
               eleButton1.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 3, "1");//liga
-                console.log("Botão elefantinho 1 clicado");
+                // console.log("Botão elefantinho 1 clicado");
               });
 
               var eleButton2 = this.add.image(
@@ -224,7 +209,7 @@ export default class parque extends Phaser.Scene {
               eleButton2.setInteractive({ useHandCursor: true });
               eleButton2.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 3, "0");//desliga
-                console.log("Botão elefantinho 2 clicado");
+                // console.log("Botão elefantinho 2 clicado");
               });
 
               var eleButton3 = this.add.image(
@@ -238,7 +223,7 @@ export default class parque extends Phaser.Scene {
               eleButton3.setInteractive({ useHandCursor: true });
               eleButton3.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 3, "2")//desce
-                console.log("Botão elefantinho 3 clicado");
+                // console.log("Botão elefantinho 3 clicado");
               });
 
               var eleButton4 = this.add.image(
@@ -252,7 +237,7 @@ export default class parque extends Phaser.Scene {
               eleButton4.setInteractive({ useHandCursor: true });
               eleButton4.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 3, "3")//sobe
-                console.log("Botão elefantinho 4 clicado");
+                // console.log("Botão elefantinho 4 clicado");
               });
 
               var closeX_ele = popup.x + popup.displayWidth / 2 - 20;
@@ -298,7 +283,7 @@ export default class parque extends Phaser.Scene {
               chapeuButton1.setInteractive({ useHandCursor: true });
               chapeuButton1.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 4, "1")//liga
-                console.log("Botão chapeu mexicano 1 clicado");
+                // console.log("Botão chapeu mexicano 1 clicado");
               });
 
               var chapeuButton2 = this.add.image(
@@ -312,7 +297,7 @@ export default class parque extends Phaser.Scene {
               chapeuButton2.setInteractive({ useHandCursor: true });
               chapeuButton2.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 4, "0")//desliga
-                console.log("Botão chapeu mexicano 2 clicado");
+                // console.log("Botão chapeu mexicano 2 clicado");
               });
 
               var closeX_chapeu = popup.x + popup.displayWidth / 2 - 20;
@@ -361,7 +346,7 @@ export default class parque extends Phaser.Scene {
               zipperButton1.setInteractive({ useHandCursor: true });
               zipperButton1.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 8, "1")//liga
-                console.log("Botão zipper 1 clicado");
+                // console.log("Botão zipper 1 clicado");
               });
 
               var zipperButton2 = this.add.image(
@@ -374,7 +359,7 @@ export default class parque extends Phaser.Scene {
               zipperButton2.setInteractive({ useHandCursor: true });
               zipperButton2.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 8, "0")//desliga
-                console.log("Botão zipper 2 clicado");
+                // console.log("Botão zipper 2 clicado");
               });
 
               var closeX_zip = popup.x + popup.displayWidth / 2 - 20;
@@ -416,7 +401,7 @@ export default class parque extends Phaser.Scene {
               rg1button1.setDepth(210);
               rg1button1.setInteractive({ useHandCursor: true });
               rg1button1.on("pointerdown", () => {
-                console.log("Botão rodaGigante1 1 clicado");
+                // console.log("Botão rodaGigante1 1 clicado");
               });
 
               var rg1button2 = this.add.image(
@@ -428,7 +413,7 @@ export default class parque extends Phaser.Scene {
               rg1button2.setDepth(210);
               rg1button2.setInteractive({ useHandCursor: true });
               rg1button2.on("pointerdown", () => {
-                console.log("Botão rodaGigante1 2 clicado");
+                // console.log("Botão rodaGigante1 2 clicado");
               });
 
               var closeX_rg1 = popup.x + popup.displayWidth / 2 - 20;
@@ -470,7 +455,7 @@ export default class parque extends Phaser.Scene {
               rg2button1.setDepth(210);
               rg2button1.setInteractive({ useHandCursor: true });
               rg2button1.on("pointerdown", () => {
-                console.log("Botão rodaGigante2 1 clicado");
+                // console.log("Botão rodaGigante2 1 clicado");
               });
 
               var rg2button2 = this.add.image(
@@ -482,7 +467,7 @@ export default class parque extends Phaser.Scene {
               rg2button2.setDepth(210);
               rg2button2.setInteractive({ useHandCursor: true });
               rg2button2.on("pointerdown", () => {
-                console.log("Botão rodaGigante2 2 clicado");
+                // console.log("Botão rodaGigante2 2 clicado");
               });
 
               var rg2button3 = this.add.image(
@@ -494,7 +479,7 @@ export default class parque extends Phaser.Scene {
               rg2button3.setDepth(210);
               rg2button3.setInteractive({ useHandCursor: true });
               rg2button3.on("pointerdown", () => {
-                console.log("Botão rodaGigante2 3 clicado");
+                // console.log("Botão rodaGigante2 3 clicado");
               });
 
               var rg2button4 = this.add.image(
@@ -506,7 +491,7 @@ export default class parque extends Phaser.Scene {
               rg2button4.setDepth(210);
               rg2button4.setInteractive({ useHandCursor: true });
               rg2button4.on("pointerdown", () => {
-                console.log("Botão rodaGigante2 4 clicado");
+                // console.log("Botão rodaGigante2 4 clicado");
               });
 
               var closeX_rg2 = popup.x + popup.displayWidth / 2 - 20;
@@ -548,7 +533,7 @@ export default class parque extends Phaser.Scene {
               bvbutton1.setInteractive({ useHandCursor: true });
               bvbutton1.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 9, "1")//liga
-                console.log("Botão barcoViking 1 clicado");
+                // console.log("Botão barcoViking 1 clicado");
               });
 
               var bvbutton2 = this.add.image(popup.x + 80, popup.y + 40, "button2");
@@ -558,7 +543,7 @@ export default class parque extends Phaser.Scene {
               bvbutton2.setInteractive({ useHandCursor: true });
               bvbutton2.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 9, "0")//desliga
-                console.log("Botão barcoViking 2 clicado");
+                // console.log("Botão barcoViking 2 clicado");
               });
 
               var closeX_bv = popup.x + popup.displayWidth / 2 - 20;
@@ -601,7 +586,7 @@ export default class parque extends Phaser.Scene {
               sambabutton1.setInteractive({ useHandCursor: true });
               sambabutton1.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 11, "1")//liga
-                console.log("Botão samba 1 clicado");
+                // console.log("Botão samba 1 clicado");
               });
 
               var sambabutton2 = this.add.image(
@@ -614,7 +599,7 @@ export default class parque extends Phaser.Scene {
               sambabutton2.setInteractive({ useHandCursor: true });
               sambabutton2.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 11, "0")//desliga
-                console.log("Botão samba 2 clicado");
+                // console.log("Botão samba 2 clicado");
               });
 
 
@@ -664,7 +649,7 @@ export default class parque extends Phaser.Scene {
               basketbutton1.setInteractive({ useHandCursor: true });
               basketbutton1.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 7, "1")//liga
-                console.log("Botão basquete 1 clicado");
+                // console.log("Botão basquete 1 clicado");
               });
 
               var basketbutton2 = this.add.image(
@@ -677,7 +662,7 @@ export default class parque extends Phaser.Scene {
               basketbutton2.setInteractive({ useHandCursor: true });
               basketbutton2.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 7, "0")//desliga
-                console.log("Botão basquete 2 clicado");
+                // console.log("Botão basquete 2 clicado");
               });
 
               var closeX_basket = popup.x + popup.displayWidth / 2 - 20;
@@ -723,7 +708,7 @@ export default class parque extends Phaser.Scene {
               mrbutton1.setInteractive({ useHandCursor: true });
               mrbutton1.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 10, "1")//liga
-                console.log("Botão montanha russa 1 clicado");
+                // console.log("Botão montanha russa 1 clicado");
               });
 
               var mrbutton2 = this.add.image(popup.x + 80, popup.y + 40, "button2");
@@ -733,7 +718,7 @@ export default class parque extends Phaser.Scene {
               mrbutton2.setInteractive({ useHandCursor: true });
               mrbutton2.on("pointerdown", () => {
                 this.mqttClient.publish("itl20242/req/" + 10, "0")//desliga
-                console.log("Botão montanha russa 2 clicado");
+                // console.log("Botão montanha russa 2 clicado");
               });
 
               var closeX_mr = popup.x + popup.displayWidth / 2 - 20;
@@ -755,11 +740,11 @@ export default class parque extends Phaser.Scene {
                 this.popupOpen = false;
               });
               break;
-            default:
-              console.log(`Colisão com ${colliderMsg}`);
+            // default:
+            //   console.log(`Colisão com ${colliderMsg}`);
           }
-        } else {
-          console.log(`Colisão com ${colliderMsg}`);
+          // } else {
+          //   console.log(`Colisão com ${colliderMsg}`);
         }
       });
     };
