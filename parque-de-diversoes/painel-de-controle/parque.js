@@ -1,5 +1,5 @@
 export default class parque extends Phaser.Scene {
-  constructor() {
+  constructor () {
     super("parque");
 
     this.jogador = undefined;
@@ -10,12 +10,14 @@ export default class parque extends Phaser.Scene {
     this.popupOpen = false;
   }
 
-  preload() {
+  preload () {
     this.load.plugin(
       "rexvirtualjoystickplugin",
       "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js",
       true,
     );
+
+    this.load.audio('sino', 'assets/sino.mp3');
 
     this.load.image("fundo", "../assets/maps/mapafundo4.jpg");
     this.load.spritesheet("jogador", "../assets/player/jogador.png", {
@@ -45,7 +47,7 @@ export default class parque extends Phaser.Scene {
     this.load.image("button4", "../assets/brinquedos/botaoCima.png");
   }
 
-  create() {
+  create () {
     this.mqttClient = mqtt.connect("wss://itl.sj.ifsc.edu.br/mqtt/");
 
     this.mqttClient.on("connect", (err) => {
@@ -76,6 +78,8 @@ export default class parque extends Phaser.Scene {
     this.mqttClient.on("message", (topic, message) => {
       console.log(topic, message.toString());
     });
+
+    this.sino = this.sound.add('sino');
 
     this.add
       .image(0, 0, "fundo")
@@ -179,7 +183,7 @@ export default class parque extends Phaser.Scene {
       const obj = this.physics.add.staticImage(x, y, key).setScale(scale);
       obj.body.setCircle(obj.displayWidth / 2);
       obj.refreshBody();
-      
+
       this.physics.add.overlap(this.jogador, obj, () => {
         if (!this.popupOpen) {
           let popup;
@@ -361,7 +365,7 @@ export default class parque extends Phaser.Scene {
               });
 
               var zipperButton2 = this.add.image(
-                popup.x + 80, popup.y +40,
+                popup.x + 80, popup.y + 40,
                 "button2",
               );
               zipperButton2.setScale(0.5)
@@ -416,7 +420,7 @@ export default class parque extends Phaser.Scene {
               });
 
               var rg1button2 = this.add.image(
-                popup.x + 80, popup.y +40,
+                popup.x + 80, popup.y + 40,
                 "button2",
               );
               rg1button2.setScale(0.5)
@@ -470,7 +474,7 @@ export default class parque extends Phaser.Scene {
               });
 
               var rg2button2 = this.add.image(
-                popup.x + 80, popup.y +40,
+                popup.x + 80, popup.y + 40,
                 "button2",
               );
               rg2button2.setScale(0.5)
@@ -547,7 +551,7 @@ export default class parque extends Phaser.Scene {
                 console.log("Botão barcoViking 1 clicado");
               });
 
-              var bvbutton2 = this.add.image(popup.x + 80, popup.y +40, "button2");
+              var bvbutton2 = this.add.image(popup.x + 80, popup.y + 40, "button2");
               bvbutton2.setScale(0.5)
               bvbutton2.setScrollFactor(0);
               bvbutton2.setDepth(210);
@@ -601,7 +605,7 @@ export default class parque extends Phaser.Scene {
               });
 
               var sambabutton2 = this.add.image(
-                popup.x + 80, popup.y +40,
+                popup.x + 80, popup.y + 40,
                 "button2",
               );
               sambabutton2.setScale(0.5)
@@ -613,7 +617,7 @@ export default class parque extends Phaser.Scene {
                 console.log("Botão samba 2 clicado");
               });
 
-     
+
               var closeX_samba = popup.x + popup.displayWidth / 2 - 20;
               var closeY_samba = popup.y - popup.displayHeight / 2 + 20;
               var closeButton_samba = this.add.text(
@@ -635,7 +639,7 @@ export default class parque extends Phaser.Scene {
                 closeButton_samba.destroy();
                 sambabutton1.destroy();
                 sambabutton2.destroy();
-          
+
                 this.popupOpen = false;
               });
               break;
@@ -664,7 +668,7 @@ export default class parque extends Phaser.Scene {
               });
 
               var basketbutton2 = this.add.image(
-                popup.x + 80, popup.y +40,
+                popup.x + 80, popup.y + 40,
                 "button2",
               );
               basketbutton2.setScale(0.5)
@@ -722,7 +726,7 @@ export default class parque extends Phaser.Scene {
                 console.log("Botão montanha russa 1 clicado");
               });
 
-              var mrbutton2 = this.add.image(popup.x + 80, popup.y +40, "button2");
+              var mrbutton2 = this.add.image(popup.x + 80, popup.y + 40, "button2");
               mrbutton2.setScale(0.5)
               mrbutton2.setScrollFactor(0);
               mrbutton2.setDepth(210);
@@ -772,7 +776,7 @@ export default class parque extends Phaser.Scene {
     criarBrinquedo(500, 1600, "samba", 0.5, "samba");
   }
 
-  update() {
+  update () {
     const angle = Phaser.Math.DegToRad(this.joystick.angle); // Converte o ângulo para radianos
     const force = this.joystick.force;
 
