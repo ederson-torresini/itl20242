@@ -48,12 +48,13 @@ server {
   add_header Content-Security-Policy "frame-ancestors 'self';";
 
   location / {
-    root /var/www/html/itl20242/parque-de-diversoes/painel-de-controle/;
+    root /opt/github/ederson-torresini/itl20242/parque-de-diversoes/painel-de-controle/;
     try_files $uri $uri/ =404;
+    http2_push_preload on;
   }
 
-  location /mqtt/ {
-    proxy_pass http://ip6-localhost:8080/;
+  location /mqtt {
+    proxy_pass http://ip6-localhost:8080;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "Upgrade";
