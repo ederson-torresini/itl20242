@@ -19,36 +19,36 @@ export default class parque extends Phaser.Scene {
 
     this.load.audio('sino', 'assets/sino.mp3');
 
-    this.load.image("fundo", "../assets/maps/mapafundo4.jpg");
-    this.load.spritesheet("jogador", "../assets/player/jogador.png", {
+    this.load.image("fundo", "./assets/maps/mapafundo4.jpg");
+    this.load.spritesheet("jogador", "./assets/player/jogador.png", {
       frameWidth: 40,
       frameHeight: 54,
     });
 
-    this.load.image("elefantinho", "../assets/brinquedos/elefantinho.png");
-    this.load.image("rodaGigante1", "../assets/brinquedos/rodaGigante1.png");
-    this.load.image("rodaGigante2", "../assets/brinquedos/rodaGigante2.png");
-    this.load.image("barcoViking", "../assets/brinquedos/barcoViking.png");
-    this.load.image("basquete", "../assets/brinquedos/basquete.png");
+    this.load.image("elefantinho", "./assets/brinquedos/elefantinho.png");
+    this.load.image("rodaGigante1", "./assets/brinquedos/rodaGigante1.png");
+    this.load.image("rodaGigante2", "./assets/brinquedos/rodaGigante2.png");
+    this.load.image("barcoViking", "./assets/brinquedos/barcoViking.png");
+    this.load.image("basquete", "./assets/brinquedos/basquete.png");
     this.load.image(
       "chapeuMexicano",
-      "../assets/brinquedos/chapeuMexicano.png",
+      "./assets/brinquedos/chapeuMexicano.png",
     );
-    this.load.image("montanhaRussa", "../assets/brinquedos/montanhaRussa.png");
-    this.load.image("samba", "../assets/brinquedos/samba.png");
-    this.load.image("zipper", "../assets/brinquedos/zipper.png")
+    this.load.image("montanhaRussa", "./assets/brinquedos/montanhaRussa.png");
+    this.load.image("samba", "./assets/brinquedos/samba.png");
+    this.load.image("zipper", "./assets/brinquedos/zipper.png")
 
-    this.load.image("painelElefante", "../assets/brinquedos/painel1.jpg");
-    this.load.image("painelPadrao", "../assets/brinquedos/painel3.png");
+    this.load.image("painelElefante", "./assets/brinquedos/painel1.jpg");
+    this.load.image("painelPadrao", "./assets/brinquedos/painel3.png");
 
-    this.load.image("button1", "../assets/brinquedos/on.png");
-    this.load.image("button2", "../assets/brinquedos/off.png");
-    this.load.image("button3", "../assets/brinquedos/botaoBaixo.png");
-    this.load.image("button4", "../assets/brinquedos/botaoCima.png");
+    this.load.image("button1", "./assets/brinquedos/on.png");
+    this.load.image("button2", "./assets/brinquedos/off.png");
+    this.load.image("button3", "./assets/brinquedos/botaoBaixo.png");
+    this.load.image("button4", "./assets/brinquedos/botaoCima.png");
   }
 
   create () {
-    this.mqttClient = mqtt.connect("wss://itl.sj.ifsc.edu.br/mqtt/");
+    this.mqttClient = mqtt.connect("wss://mqtt.eclipseprojects.io/mqtt");
 
     this.mqttClient.on("connect", (err) => {
       console.log("Conectado ao broker MQTT");
